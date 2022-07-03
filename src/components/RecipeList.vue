@@ -1,10 +1,17 @@
 <template>
   <div class="home">
-    <h1>My Recipes</h1>
-    <b-button v-b-modal.addRecipeModal>Add recipe</b-button>
+    <div class="text-center">
+      <h1>My Recipes</h1>
+      <b-button v-b-modal.addRecipeModal>Add recipe</b-button>
+    </div>
     <AddRecipe @submit-new-recipe='submitRecipe' />
     <div class="recipes">
-      <b-card v-for="recipe in recipes" :key="recipe.id" :title="recipe.name">
+      <b-card class="col-md-6 mx-md-auto" v-for="recipe in recipes" :key="recipe.id" :title="recipe.name">
+        <b-card-text>{{ recipe.description }}</b-card-text>
+        <div>
+          <b-button>View recipe</b-button>
+          <b-button class="float-end">Remove recipe</b-button>
+        </div>
       </b-card>
     </div>
   </div>
