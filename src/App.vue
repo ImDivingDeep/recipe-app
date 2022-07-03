@@ -1,15 +1,11 @@
 <template>
-  <RecipeList/>
+  <router-view />
 </template>
 
 <script>
-import RecipeList from './components/RecipeList.vue'
 
 export default {
   name: 'App',
-  components: {
-    RecipeList
-  }
 }
 </script>
 
