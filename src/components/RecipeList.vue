@@ -3,6 +3,7 @@
     <div class="text-center">
       <h1>My Recipes</h1>
       <b-button variant="primary" v-b-modal.addRecipeModal>Add recipe</b-button>
+      <b-button variant="primary" :to="{ name: 'Recipe', params: {recipeId: getRandomRecipeId()}}">Random recipe</b-button>
     </div>
     <AddRecipe @submit-new-recipe='submitRecipe' />
     <div class="recipes">
@@ -22,11 +23,18 @@ import { ref } from "vue";
 import AddRecipe from './AddRecipe.vue'
 
 let recipes = ref([
-    { name: 'Chicken Tonight', ingredients: ["Chicken", " Chicken Tonight", "Rice"] },
+    { name: 'Chicken Tonight', ingredients: ["Chicken", " Chicken Tonight", "Rice"], description: "One of our favorite dishes" },
 ]);
 
 if (window.localStorage.getItem('recipes') !== null) {
     recipes.value = JSON.parse(window.localStorage.getItem('recipes'));
+}
+else {
+  window.localStorage.setItem('recipes', JSON.stringify(recipes.value))
+}
+
+function getRandomRecipeId() {
+  return Math.floor(Math.random() * (recipes.value.length))
 }
 
 function submitRecipe(recipe) {
